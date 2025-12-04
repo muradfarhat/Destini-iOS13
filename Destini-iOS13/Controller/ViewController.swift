@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.storyLabel.text = "You see a fork in the road."
+        self.choice1Button.setTitle("Take a left.", for: .normal)
+        self.choice2Button.setTitle("Take a right.", for: .normal)
 
     }
 
