@@ -14,21 +14,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var choice1Button: UIButton!
     @IBOutlet weak var choice2Button: UIButton!
     
-    let stores = [
-        Story(title: "You see a fork in the road.", choice1: "Take a left.", choice2: "Take a right."),
-        Story(title: "You see a tiger.", choice1: "Shout for help.", choice2: "Play dead."),
-        Story(title: "You find a treasure chest.", choice1: "Open it.", choice2: "Check for traps.")
-    ]
+    let storyBrain = StoryBrain()
+    var exampleStory: Story?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.storyLabel.text = stores[0].title
-        self.choice1Button.setTitle(stores[0].choice1, for: .normal)
-        self.choice2Button.setTitle(stores[0].choice2, for: .normal)
+        exampleStory = storyBrain.stores[0]
+        
+        buildScreen()
 
     }
 
-
+    @IBAction func choiceMade(_ sender: UIButton) {
+        let senderTitle = sender.titleLabel?.text
+        exampleStory = senderTitle == exampleStory?.choice1 ? storyBrain.stores[1] : storyBrain.stores[2]
+        buildScreen()
+    }
+    
+    func buildScreen() {
+        self.storyLabel.text = exampleStory!.title
+        self.choice1Button.setTitle(exampleStory!.choice1, for: .normal)
+        self.choice2Button.setTitle(exampleStory!.choice2, for: .normal)
+    }
+    
 }
 
